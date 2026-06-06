@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 620" role="img" aria-labelledby="title desc">
+  <title id="title">Setrika dan pakaian terlipat</title>
+  <desc id="desc">Ilustrasi setrika biru dan tumpukan pakaian bersih berwarna.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1">
+      <stop offset="0" stop-color="#eefcff"/>
+      <stop offset="1" stop-color="#1687dc"/>
+    </linearGradient>
+    <linearGradient id="iron" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#d9e7f5"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="#0f2342" flood-opacity=".17"/>
+    </filter>
+  </defs>
+  <rect width="980" height="620" fill="url(#bg)"/>
+  <rect y="480" width="980" height="140" fill="#f4f8fc" opacity=".92"/>
+  <g transform="translate(92 152)" filter="url(#shadow)">
+    <path d="M38 271h302c37 0 66-33 59-69-26-136-101-216-226-240-78 54-124 134-135 240-4 35 24 69 60 69z" fill="url(#iron)"/>
+    <path d="M166 31c46 10 84 32 113 67H143c8-28 16-50 23-67z" fill="#13a8bf" opacity=".8"/>
+    <path d="M118 154c33-53 82-76 147-65 18 3 30 21 27 39-16 75-64 113-143 116-39 2-52-55-31-90z" fill="#13a8bf"/>
+    <circle cx="199" cy="165" r="54" fill="#dffbff" opacity=".76"/>
+    <path d="M38 271h350" stroke="#64748b" stroke-width="16" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(520 142)" filter="url(#shadow)">
+    <rect width="330" height="42" rx="20" fill="#6ed3f4"/>
+    <rect y="42" width="330" height="42" rx="20" fill="#8b61d8"/>
+    <rect y="84" width="330" height="42" rx="20" fill="#ff7bbd"/>
+    <rect y="126" width="330" height="42" rx="20" fill="#f59e0b"/>
+    <rect y="168" width="330" height="42" rx="20" fill="#53c484"/>
+    <rect y="210" width="330" height="42" rx="20" fill="#f4f8fc"/>
+    <rect y="252" width="330" height="42" rx="20" fill="#ec4899"/>
+    <path d="M123-18c24-20 56-15 68 11 20-18 52-8 58 17-29 16-58 20-86 12-21 14-43 8-40-40z" fill="#fff7ad"/>
+  </g>
+</svg>

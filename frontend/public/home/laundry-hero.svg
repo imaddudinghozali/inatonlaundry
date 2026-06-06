@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" role="img" aria-labelledby="title desc">
+  <title id="title">Ruang laundry bersih dengan mesin dan pakaian terlipat</title>
+  <desc id="desc">Ilustrasi ruang laundry modern dengan mesin cuci, kain biru, dan pakaian terlipat.</desc>
+  <defs>
+    <linearGradient id="wall" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#dff7fb"/>
+    </linearGradient>
+    <linearGradient id="table" x1="0" x2="1">
+      <stop offset="0" stop-color="#eef4fa"/>
+      <stop offset="1" stop-color="#cbd9e8"/>
+    </linearGradient>
+    <linearGradient id="clothBlue" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#9debf1"/>
+      <stop offset="1" stop-color="#1f8ad8"/>
+    </linearGradient>
+    <linearGradient id="clothGold" x1="0" x2="1">
+      <stop offset="0" stop-color="#fee9a8"/>
+      <stop offset="1" stop-color="#d79a27"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#0f2342" flood-opacity=".18"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="820" fill="url(#wall)"/>
+  <rect x="0" y="0" width="1200" height="210" fill="#0b7ec0" opacity=".16"/>
+  <g opacity=".24">
+    <rect x="70" y="70" width="270" height="46" rx="23" fill="#fff"/>
+    <rect x="410" y="54" width="210" height="42" rx="21" fill="#fff"/>
+    <rect x="785" y="76" width="280" height="46" rx="23" fill="#fff"/>
+  </g>
+  <g transform="translate(45 205)" filter="url(#shadow)">
+    <g>
+      <rect x="0" y="0" width="250" height="300" rx="28" fill="#f8fbff"/>
+      <rect x="26" y="42" width="198" height="198" rx="99" fill="#23364f"/>
+      <circle cx="125" cy="141" r="78" fill="#0b1728"/>
+      <circle cx="125" cy="141" r="55" fill="#14263d"/>
+      <rect x="37" y="18" width="92" height="14" rx="7" fill="#b6c7d8"/>
+      <circle cx="203" cy="25" r="9" fill="#13a8bf"/>
+    </g>
+    <g transform="translate(277 0)">
+      <rect x="0" y="0" width="250" height="300" rx="28" fill="#f8fbff"/>
+      <rect x="26" y="42" width="198" height="198" rx="99" fill="#23364f"/>
+      <circle cx="125" cy="141" r="78" fill="#0b1728"/>
+      <circle cx="125" cy="141" r="55" fill="#14263d"/>
+      <rect x="37" y="18" width="92" height="14" rx="7" fill="#b6c7d8"/>
+      <circle cx="203" cy="25" r="9" fill="#13a8bf"/>
+    </g>
+    <g transform="translate(554 0)">
+      <rect x="0" y="0" width="250" height="300" rx="28" fill="#f8fbff"/>
+      <rect x="26" y="42" width="198" height="198" rx="99" fill="#23364f"/>
+      <circle cx="125" cy="141" r="78" fill="#0b1728"/>
+      <circle cx="125" cy="141" r="55" fill="#14263d"/>
+      <rect x="37" y="18" width="92" height="14" rx="7" fill="#b6c7d8"/>
+      <circle cx="203" cy="25" r="9" fill="#13a8bf"/>
+    </g>
+    <g transform="translate(831 0)" opacity=".72">
+      <rect x="0" y="0" width="250" height="300" rx="28" fill="#f8fbff"/>
+      <rect x="26" y="42" width="198" height="198" rx="99" fill="#23364f"/>
+      <circle cx="125" cy="141" r="78" fill="#0b1728"/>
+    </g>
+  </g>
+  <g transform="translate(95 548)" filter="url(#shadow)">
+    <path d="M0 72c0-30 24-54 54-54h936c30 0 54 24 54 54v40H0z" fill="url(#table)"/>
+    <rect x="18" y="101" width="1008" height="52" rx="18" fill="#d6e0eb"/>
+    <g transform="translate(120 -12)">
+      <path d="M0 86c45-38 116-39 166-9 38 22 82 22 121 4 52-25 118-20 158 15 17 15 10 44-12 49H20C-8 144-19 102 0 86z" fill="url(#clothBlue)"/>
+      <path d="M22 116c72 19 151 17 238-5 48-12 93-12 136 0" fill="none" stroke="#dffbff" stroke-width="12" stroke-linecap="round" opacity=".75"/>
+      <path d="M58 82c88 32 172 31 252-3" fill="none" stroke="#0674bd" stroke-width="10" stroke-linecap="round" opacity=".35"/>
+    </g>
+    <g transform="translate(657 34)">
+      <rect width="230" height="35" rx="16" fill="#69b5ea"/>
+      <rect y="33" width="230" height="35" rx="16" fill="#4fa0db"/>
+      <rect y="66" width="230" height="35" rx="16" fill="#1f7cc5"/>
+    </g>
+    <g transform="translate(874 45) rotate(-4)">
+      <rect width="196" height="34" rx="17" fill="url(#clothGold)"/>
+      <rect y="31" width="196" height="34" rx="17" fill="#d99b2b"/>
+    </g>
+  </g>
+</svg>

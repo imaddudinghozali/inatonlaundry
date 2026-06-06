@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 1060" role="img" aria-labelledby="title desc">
+  <title id="title">Pakaian dimasukkan ke mesin cuci</title>
+  <desc id="desc">Ilustrasi tangan memasukkan pakaian biru ke mesin cuci.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f9fbff"/>
+      <stop offset="1" stop-color="#e7f4f7"/>
+    </linearGradient>
+    <linearGradient id="cloth" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#84e3ea"/>
+      <stop offset="1" stop-color="#1185c7"/>
+    </linearGradient>
+    <filter id="shadow" x="-15%" y="-15%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="18" stdDeviation="20" flood-color="#0f2342" flood-opacity=".16"/>
+    </filter>
+  </defs>
+  <rect width="820" height="1060" fill="url(#bg)"/>
+  <g transform="translate(86 120)" filter="url(#shadow)">
+    <rect x="0" y="0" width="648" height="780" rx="72" fill="#ffffff"/>
+    <circle cx="324" cy="342" r="246" fill="#d7e2ec"/>
+    <circle cx="324" cy="342" r="205" fill="#172335"/>
+    <circle cx="324" cy="342" r="160" fill="#0c1422"/>
+    <path d="M162 200c99 47 206 54 320 11" fill="none" stroke="#ffffff" stroke-width="22" opacity=".13" stroke-linecap="round"/>
+    <path d="M155 605h338c38 0 69 31 69 69v32H86v-32c0-38 31-69 69-69z" fill="#f4f8fc"/>
+  </g>
+  <g transform="translate(130 420)" filter="url(#shadow)">
+    <path d="M44 210c-57-90 18-198 122-172 54-62 167-45 196 29 75-14 142 48 135 122 72 24 75 131 5 162H79c-45-18-59-78-35-141z" fill="url(#cloth)"/>
+    <path d="M78 215c86 41 172 37 258-12 42-24 85-25 129-6" fill="none" stroke="#c7fbff" stroke-width="16" stroke-linecap="round" opacity=".65"/>
+    <path d="M132 106c70 49 149 61 238 35" fill="none" stroke="#0879bb" stroke-width="14" stroke-linecap="round" opacity=".35"/>
+  </g>
+  <g transform="translate(438 502)">
+    <path d="M0 70c70-46 153-48 249-4 29 13 43 46 33 76l-20 61c-12 35-51 53-84 38L-21 151z" fill="#f7c8ad"/>
+    <path d="M23 84c62-19 126-14 192 16" fill="none" stroke="#d99f84" stroke-width="14" stroke-linecap="round" opacity=".46"/>
+  </g>
+</svg>
