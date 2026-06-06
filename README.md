@@ -75,6 +75,49 @@ Lint PHP:
 Get-ChildItem -Path backend -Recurse -Filter *.php | ForEach-Object { php -l $_.FullName }
 ```
 
+## Deploy Demo Railway
+
+Repo ini sudah disiapkan untuk Railway dengan `Dockerfile`. Container akan:
+
+- build React dari `frontend/`;
+- menaruh hasil build ke Apache document root;
+- menaruh PHP API di `/api`;
+- menjalankan Apache pada port dari environment variable `PORT`;
+- membaca koneksi database dari env Railway/MySQL.
+
+Langkah deploy demo:
+
+1. Push commit terbaru ke GitHub.
+2. Di Railway, buat New Project dari repo GitHub `imaddudinghozali/inatonlaundry`.
+3. Tambahkan service MySQL di project yang sama.
+4. Di service aplikasi, set variables berikut. Jika nama service database bukan `MySQL`, sesuaikan nama referensinya.
+
+```text
+MYSQLHOST=${{MySQL.MYSQLHOST}}
+MYSQLPORT=${{MySQL.MYSQLPORT}}
+MYSQLUSER=${{MySQL.MYSQLUSER}}
+MYSQLPASSWORD=${{MySQL.MYSQLPASSWORD}}
+MYSQLDATABASE=${{MySQL.MYSQLDATABASE}}
+```
+
+Alternatifnya, Railway juga bisa memakai `DATABASE_URL` atau `MYSQL_URL` jika variable tersebut tersedia.
+
+5. Generate public domain untuk service aplikasi.
+6. Import database ke MySQL Railway:
+
+```bash
+mysql -h <MYSQLHOST> -P <MYSQLPORT> -u <MYSQLUSER> -p<MYSQLPASSWORD> <MYSQLDATABASE> < database/schema.sql
+mysql -h <MYSQLHOST> -P <MYSQLPORT> -u <MYSQLUSER> -p<MYSQLPASSWORD> <MYSQLDATABASE> < database/seed.sql
+```
+
+7. Buka domain Railway dan test akun demo.
+
+Catatan demo Railway:
+
+- Healthcheck memakai `/api/health`; deploy akan butuh MySQL variable yang benar.
+- File bukti top up tersimpan di filesystem container. Untuk pemakaian serius, tambahkan Railway Volume atau storage eksternal agar file upload tidak hilang saat redeploy.
+- Sebelum dipakai umum, hapus hint akun demo dari UI dan ganti semua password seed.
+
 ## Backup dan Restore Database
 
 Backup harian direkomendasikan sebelum operasional tutup atau sebelum deploy perubahan:

@@ -1894,6 +1894,12 @@ function BalancePage({ showNotice }) {
 
 function ProfilePage({ showNotice }) {
   const [member, setMember] = useState(null);
+  const [passwordForm, setPasswordForm] = useState({
+    current_password: '',
+    new_password: '',
+    confirm_password: '',
+  });
+  const [passwordBusy, setPasswordBusy] = useState(false);
 
   useEffect(() => {
     api('/members')
@@ -1901,37 +1907,105 @@ function ProfilePage({ showNotice }) {
       .catch((error) => showNotice('danger', error.message));
   }, [showNotice]);
 
+  async function submitPassword(event) {
+    event.preventDefault();
+
+    if (passwordForm.new_password !== passwordForm.confirm_password) {
+      showNotice('danger', 'Konfirmasi password baru belum sama.');
+      return;
+    }
+
+    setPasswordBusy(true);
+    try {
+      await api('/auth/change-password', {
+        method: 'POST',
+        body: {
+          current_password: passwordForm.current_password,
+          new_password: passwordForm.new_password,
+        },
+      });
+      setPasswordForm({ current_password: '', new_password: '', confirm_password: '' });
+      showNotice('success', 'Password berhasil diganti.');
+    } catch (error) {
+      showNotice('danger', error.message);
+    } finally {
+      setPasswordBusy(false);
+    }
+  }
+
   if (!member) return <EmptyState label="Memuat profil..." />;
 
   return (
-    <DataPanel title="Profil Customer">
-      <dl className="detail-grid">
-        <div>
-          <dt>Kode Member</dt>
-          <dd>{member.kode_member}</dd>
-        </div>
-        <div>
-          <dt>Nama</dt>
-          <dd>{member.nama}</dd>
-        </div>
-        <div>
-          <dt>Nomor HP</dt>
-          <dd>{member.no_hp || '-'}</dd>
-        </div>
-        <div>
-          <dt>Status</dt>
-          <dd><Badge label={member.status} /></dd>
-        </div>
-        <div>
-          <dt>Saldo</dt>
-          <dd>{rupiah(member.saldo)}</dd>
-        </div>
-        <div>
-          <dt>Alamat</dt>
-          <dd>{member.alamat || '-'}</dd>
-        </div>
-      </dl>
-    </DataPanel>
+    <section className="content-stack">
+      <DataPanel title="Profil Customer">
+        <dl className="detail-grid">
+          <div>
+            <dt>Kode Member</dt>
+            <dd>{member.kode_member}</dd>
+          </div>
+          <div>
+            <dt>Nama</dt>
+            <dd>{member.nama}</dd>
+          </div>
+          <div>
+            <dt>Nomor HP</dt>
+            <dd>{member.no_hp || '-'}</dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd><Badge label={member.status} /></dd>
+          </div>
+          <div>
+            <dt>Saldo</dt>
+            <dd>{rupiah(member.saldo)}</dd>
+          </div>
+          <div>
+            <dt>Alamat</dt>
+            <dd>{member.alamat || '-'}</dd>
+          </div>
+        </dl>
+      </DataPanel>
+
+      <DataPanel title="Ganti Password">
+        <form className="form-grid wide" onSubmit={submitPassword}>
+          <label>
+            Password Saat Ini
+            <input
+              type="password"
+              value={passwordForm.current_password}
+              onChange={(event) => setPasswordForm({ ...passwordForm, current_password: event.target.value })}
+              autoComplete="current-password"
+              required
+            />
+          </label>
+          <label>
+            Password Baru
+            <input
+              type="password"
+              value={passwordForm.new_password}
+              onChange={(event) => setPasswordForm({ ...passwordForm, new_password: event.target.value })}
+              minLength={8}
+              autoComplete="new-password"
+              required
+            />
+          </label>
+          <label>
+            Konfirmasi Password Baru
+            <input
+              type="password"
+              value={passwordForm.confirm_password}
+              onChange={(event) => setPasswordForm({ ...passwordForm, confirm_password: event.target.value })}
+              minLength={8}
+              autoComplete="new-password"
+              required
+            />
+          </label>
+          <button className="primary-button" disabled={passwordBusy}>
+            {passwordBusy ? 'Menyimpan...' : 'Simpan Password'}
+          </button>
+        </form>
+      </DataPanel>
+    </section>
   );
 }
 

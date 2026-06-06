@@ -1,0 +1,12 @@
+.git
+.gstack
+backup
+logs
+qa-screenshots
+frontend/node_modules
+frontend/dist
+backend/storage/sessions/sess_*
+backend/uploads/topups/*
+!backend/uploads/topups/.gitkeep
+.env
+.env.*
