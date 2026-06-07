@@ -35,9 +35,9 @@ const whatsappLink = 'https://wa.me/message/TK5LFABTXCBJE1';
 const mapsLink = 'https://www.google.com/maps/place/INATON+LAUNDRY+EXPRESS+JATINANGOR+3+Jam+Beres/@-6.9342517,107.7673749,17z/data=!3m1!4b1!4m6!3m5!1s0x2e68c5001b36f0d9:0xb80c333e92ca3411!8m2!3d-6.934257!4d107.7699498!16s%2Fg%2F11n9vj24m6?entry=ttu&g_ep=EgoyMDI2MDYwMS4wIKXMDSoASAFQAw%3D%3D';
 
 const homeImages = {
-  hero: '/home/laundry-hero.svg',
-  washer: '/home/laundry-washer.svg',
-  iron: '/home/laundry-iron.svg',
+  hero: '/home/hero.jpg',
+  washer: '/home/washer.jpg',
+  iron: '/home/iron.jpg',
 };
 
 const homeReasons = [

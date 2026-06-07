@@ -1748,6 +1748,11 @@ body.home-drawer-open {
   color: var(--blue-700);
 }
 
+.home-plan-row:not(.header) span {
+  color: var(--ink-900);
+  font-weight: 700;
+}
+
 .home-membership,
 .home-final-cta {
   background:
