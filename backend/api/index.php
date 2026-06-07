@@ -91,11 +91,47 @@ function dispatch(PDO $pdo, string $method, array $segments): never
 
 function handle_setup_import(PDO $pdo): never
 {
-    $expectedToken = getenv('SETUP_IMPORT_TOKEN');
-    $sentToken = (string) ($_GET['token'] ?? ($_SERVER['HTTP_X_SETUP_TOKEN'] ?? ''));
+    $tokenKeys = [
+        'SETUP_IMPORT_TOKEN',
+        'IMPORT_TOKEN',
+        'RAILWAY_IMPORT_TOKEN',
+        'RAILWAY_SETUP_IMPORT_TOKEN',
+    ];
+    $expectedToken = '';
+    $loadedTokenKey = null;
 
-    if ($expectedToken === false || $expectedToken === '' || !hash_equals((string) $expectedToken, $sentToken)) {
-        fail('Endpoint import tidak aktif.', 404);
+    foreach ($tokenKeys as $key) {
+        $value = trim((string) (getenv($key) ?: ''));
+        if ($value !== '') {
+            $expectedToken = $value;
+            $loadedTokenKey = $key;
+            break;
+        }
+    }
+
+    $sentToken = trim((string) ($_GET['token'] ?? ($_SERVER['HTTP_X_SETUP_TOKEN'] ?? '')));
+
+    if ($expectedToken === '') {
+        fail('Token import belum terbaca oleh container.', 503, [
+            'expected_env_keys' => $tokenKeys,
+            'next_step' => 'Set salah satu variable di service aplikasi lalu redeploy.',
+        ]);
+    }
+
+    if ($sentToken === '') {
+        fail('Token import belum dikirim.', 401, [
+            'env_key_loaded' => $loadedTokenKey,
+            'next_step' => 'Tambahkan ?token=VALUE di URL import.',
+        ]);
+    }
+
+    if (!hash_equals($expectedToken, $sentToken)) {
+        fail('Token import tidak cocok.', 403, [
+            'env_key_loaded' => $loadedTokenKey,
+            'sent_token_length' => strlen($sentToken),
+            'expected_token_length' => strlen($expectedToken),
+            'hint' => 'Jika token memakai karakter seperti # atau &, URL-encode token atau pakai token sederhana tanpa simbol.',
+        ]);
     }
 
     $databaseDir = null;
