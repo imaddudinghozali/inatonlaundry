@@ -110,6 +110,20 @@ mysql -h <MYSQLHOST> -P <MYSQLPORT> -u <MYSQLUSER> -p<MYSQLPASSWORD> <MYSQLDATAB
 mysql -h <MYSQLHOST> -P <MYSQLPORT> -u <MYSQLUSER> -p<MYSQLPASSWORD> <MYSQLDATABASE> < database/seed.sql
 ```
 
+Jika Railway Database UI hanya menerima satu statement per eksekusi dan tidak ada TCP Proxy, gunakan importer demo sementara:
+
+1. Set variable aplikasi `SETUP_IMPORT_TOKEN` dengan nilai acak panjang.
+2. Redeploy aplikasi.
+3. Buka sekali:
+
+```text
+https://<domain-railway>/api/setup/import-demo?token=<SETUP_IMPORT_TOKEN>
+```
+
+4. Pastikan responsnya `Database demo berhasil diimport`.
+5. Hapus variable `SETUP_IMPORT_TOKEN`.
+6. Redeploy lagi agar endpoint import mati.
+
 7. Buka domain Railway dan test akun demo.
 
 Catatan demo Railway:

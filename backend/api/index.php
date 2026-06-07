@@ -42,6 +42,10 @@ function dispatch(PDO $pdo, string $method, array $segments): never
         handle_auth($pdo, $method, array_slice($segments, 1));
     }
 
+    if (($segments[0] ?? '') === 'setup' && ($segments[1] ?? '') === 'import-demo' && $method === 'GET') {
+        handle_setup_import($pdo);
+    }
+
     if (($segments[0] ?? '') === 'dashboard' && $method === 'GET') {
         handle_dashboard($pdo);
     }
@@ -83,6 +87,60 @@ function dispatch(PDO $pdo, string $method, array $segments): never
     }
 
     fail('Endpoint tidak ditemukan.', 404);
+}
+
+function handle_setup_import(PDO $pdo): never
+{
+    $expectedToken = getenv('SETUP_IMPORT_TOKEN');
+    $sentToken = (string) ($_GET['token'] ?? ($_SERVER['HTTP_X_SETUP_TOKEN'] ?? ''));
+
+    if ($expectedToken === false || $expectedToken === '' || !hash_equals((string) $expectedToken, $sentToken)) {
+        fail('Endpoint import tidak aktif.', 404);
+    }
+
+    $databaseDir = null;
+    foreach ([dirname(__DIR__) . '/database', dirname(__DIR__, 2) . '/database'] as $candidate) {
+        if (is_dir($candidate)) {
+            $databaseDir = $candidate;
+            break;
+        }
+    }
+
+    if ($databaseDir === null) {
+        fail('Folder database tidak ditemukan.', 500);
+    }
+
+    $files = [
+        $databaseDir . '/railway-schema.sql',
+        $databaseDir . '/railway-seed.sql',
+    ];
+
+    $executed = 0;
+    $pdo->beginTransaction();
+    try {
+        foreach ($files as $file) {
+            if (!is_file($file)) {
+                throw new RuntimeException('File import tidak ditemukan: ' . basename($file), 500);
+            }
+
+            $sql = (string) file_get_contents($file);
+            foreach (array_filter(array_map('trim', explode(';', $sql))) as $statement) {
+                $pdo->exec($statement);
+                $executed++;
+            }
+        }
+        $pdo->commit();
+    } catch (Throwable $e) {
+        if ($pdo->inTransaction()) {
+            $pdo->rollBack();
+        }
+        throw $e;
+    }
+
+    ok([
+        'executed_statements' => $executed,
+        'disable_next' => 'Hapus variable SETUP_IMPORT_TOKEN dari Railway setelah import berhasil.',
+    ], 'Database demo berhasil diimport.');
 }
 
 function handle_auth(PDO $pdo, string $method, array $segments): never

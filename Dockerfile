@@ -27,6 +27,7 @@ COPY backend/config/ /var/www/html/config/
 COPY backend/helpers/ /var/www/html/helpers/
 COPY backend/storage/ /var/www/html/storage/
 COPY backend/uploads/ /var/www/html/uploads/
+COPY database/ /var/www/html/database/
 
 RUN mkdir -p /var/www/html/storage/sessions /var/www/html/uploads/topups \
     && chown -R www-data:www-data /var/www/html/storage /var/www/html/uploads \
