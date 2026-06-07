@@ -12,9 +12,14 @@ if (method() === 'OPTIONS') {
     ok();
 }
 
-$pdo = db();
 $path = route_path();
 $segments = array_values(array_filter(explode('/', trim($path, '/'))));
+
+if ($segments === ['health'] && method() === 'GET') {
+    ok(['status' => 'healthy', 'time' => date(DATE_ATOM)]);
+}
+
+$pdo = db();
 
 try {
     verify_csrf();
@@ -33,10 +38,6 @@ try {
 
 function dispatch(PDO $pdo, string $method, array $segments): never
 {
-    if ($segments === ['health'] && $method === 'GET') {
-        ok(['status' => 'healthy', 'time' => date(DATE_ATOM)]);
-    }
-
     if (($segments[0] ?? '') === 'auth') {
         handle_auth($pdo, $method, array_slice($segments, 1));
     }
