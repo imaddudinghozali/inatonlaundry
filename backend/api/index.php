@@ -115,30 +115,25 @@ function handle_setup_import(PDO $pdo): never
         $databaseDir . '/railway-seed.sql',
     ];
 
-    $executed = 0;
-    $pdo->beginTransaction();
-    try {
-        foreach ($files as $file) {
-            if (!is_file($file)) {
-                throw new RuntimeException('File import tidak ditemukan: ' . basename($file), 500);
-            }
+    $executed = [];
+    foreach ($files as $file) {
+        if (!is_file($file)) {
+            throw new RuntimeException('File import tidak ditemukan: ' . basename($file), 500);
+        }
 
-            $sql = (string) file_get_contents($file);
-            foreach (array_filter(array_map('trim', explode(';', $sql))) as $statement) {
-                $pdo->exec($statement);
-                $executed++;
-            }
+        $fileCount = 0;
+        $sql = (string) file_get_contents($file);
+        foreach (array_filter(array_map('trim', explode(';', $sql))) as $statement) {
+            $pdo->exec($statement);
+            $fileCount++;
         }
-        $pdo->commit();
-    } catch (Throwable $e) {
-        if ($pdo->inTransaction()) {
-            $pdo->rollBack();
-        }
-        throw $e;
+
+        $executed[basename($file)] = $fileCount;
     }
 
     ok([
-        'executed_statements' => $executed,
+        'executed_statements' => array_sum($executed),
+        'files' => $executed,
         'disable_next' => 'Hapus variable SETUP_IMPORT_TOKEN dari Railway setelah import berhasil.',
     ], 'Database demo berhasil diimport.');
 }
