@@ -1749,7 +1749,7 @@ body.home-drawer-open {
 }
 
 .home-plan-row:not(.header) span {
-  color: var(--ink-900);
+  color: var(--blue-700);
   font-weight: 700;
 }
 
